@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleSmart Wardrobe - Weather-Aware Outfit Management</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/filters.css">
+    <link rel="stylesheet" href="/css/components/items-grid.css">
+    <link rel="stylesheet" href="/css/components/item-form.css">
+    <link rel="stylesheet" href="/css/components/modal.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header Component -->
+        <header class="app-header">
+            <div class="header-container">
+                <h1 class="logo">StyleSmart Wardrobe</h1>
+                <nav class="header-nav">
+                    <button id="add-item-btn" class="btn btn-primary">+ Add Item</button>
+                    <button id="outfit-builder-btn" class="btn btn-secondary">Outfit Builder</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h2 id="welcome-message">Welcome to StyleSmart!</h2>
+                <div id="weather-display" class="weather-info">
+                    <!-- Weather info will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Quick Filters -->
+            <section class="quick-filters">
+                <h3>Quick Filters</h3>
+                <div class="filter-buttons">
+                    <button class="filter-chip" data-weather="sunny">☀️ Sunny</button>
+                    <button class="filter-chip" data-weather="rainy">🌧️ Rainy</button>
+                    <button class="filter-chip" data-weather="cold">❄️ Cold</button>
+                    <button class="filter-chip" data-weather="hot">🔥 Hot</button>
+                    <button class="filter-chip" data-occasion="work">👔 Work</button>
+                    <button class="filter-chip" data-occasion="party">🎉 Party</button>
+                    <button class="filter-chip" data-occasion="athletic">🏃 Athletic</button>
+                    <button class="filter-chip" data-occasion="casual">👕 Casual</button>
+                </div>
+            </section>
+
+            <!-- Search Bar -->
+            <section class="search-section">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="search-bar" 
+                    placeholder="Search your wardrobe..."
+                />
+                <button id="search-btn" class="btn btn-search">🔍 Search</button>
+            </section>
+
+            <!-- Advanced Filters Sidebar -->
+            <div class="content-with-sidebar">
+                <aside class="filters-sidebar" id="filters-sidebar">
+                    <h3>Filters <button id="clear-filters" class="btn-text">Clear All</button></h3>
+                    
+                    <div class="filter-group">
+                        <h4>Temperature Range</h4>
+                        <div class="temp-range">
+                            <label for="min-temp">Min: <span id="min-temp-value">32</span>°F</label>
+                            <input type="range" id="min-temp" min="0" max="100" value="32">
+                            <label for="max-temp">Max: <span id="max-temp-value">95</span>°F</label>
+                            <input type="range" id="max-temp" min="0" max="100" value="95">
+                        </div>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="rain-suitable"> Rain suitable</label>
+                            <label><input type="checkbox" id="snow-suitable"> Snow suitable</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Category</h4>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="tops"> Tops</label>
+                            <label><input type="checkbox" value="bottoms"> Bottoms</label>
+                            <label><input type="checkbox" value="dresses"> Dresses</label>
+                            <label><input type="checkbox" value="outerwear"> Outerwear</label>
+                            <label><input type="checkbox" value="shoes"> Shoes</label>
+                            <label><input type="checkbox" value="accessories"> Accessories</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Color</h4>
+                        <select id="color-filter" class="filter-select">
+                            <option value="">All Colors</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="gray">Gray</option>
+                            <option value="navy">Navy</option>
+                            <option value="blue">Blue</option>
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="brown">Brown</option>
+                            <option value="beige">Beige</option>
+                            <option value="pink">Pink</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Last Worn</h4>
+                        <div class="radio-group">
+                            <label><input type="radio" name="last-worn" value=""> Any time</label>
+                            <label><input type="radio" name="last-worn" value="week"> Not in last week</label>
+                            <label><input type="radio" name="last-worn" value="month"> Not in last month</label>
+                            <label><input type="radio" name="last-worn" value="never"> Never worn</label>
+                        </div>
+                    </div>
+
+                    <button id="apply-filters" class="btn btn-primary btn-block">Apply Filters</button>
+                </aside>
+
+                <!-- Items Grid -->
+                <section class="items-container">
+                    <div class="items-header">
+                        <h3>Your Wardrobe <span id="items-count">(0 items)</span></h3>
+                        <select id="sort-select" class="sort-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="most-worn">Most Worn</option>
+                            <option value="least-worn">Least Worn</option>
+                        </select>
+                    </div>
+                    
+                    <div id="items-grid" class="items-grid">
+                        <!-- Items will be dynamically inserted here -->
+                    </div>
+                    
+                    <div class="load-more-container">
+                        <button id="load-more-btn" class="btn btn-secondary">Load More</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Add/Edit Item Modal -->
+        <div id="item-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-title">Add New Item</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                
+                <form id="item-form" class="item-form">
+                    <div class="form-group">
+                        <label for="item-name">Name *</label>
+                        <input type="text" id="item-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-category">Category *</label>
+                            <select id="item-category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="tops">Tops</option>
+                                <option value="bottoms">Bottoms</option>
+                                <option value="dresses">Dresses</option>
+                                <option value="outerwear">Outerwear</option>
+                                <option value="shoes">Shoes</option>
+                                <option value="accessories">Accessories</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="item-color">Color</label>
+                            <select id="item-color" name="color">
+                                <option value="">Select Color</option>
+                                <option value="black">Black</option>
+                                <option value="white">White</option>
+                                <option value="gray">Gray</option>
+                                <option value="navy">Navy</option>
+                                <option value="blue">Blue</option>
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="brown">Brown</option>
+                                <option value="beige">Beige</option>
+                                <option value="pink">Pink</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-brand">Brand</label>
+                            <input type="text" id="item-brand" name="brand">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="item-size">Size</label>
+                            <input type="text" id="item-size" name="size" placeholder="e.g., M, L, 8">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Weather Suitable For</label>
+                        <div class="temp-inputs">
+                            <label>Min Temp (°F): <input type="number" id="min-temp-input" name="min_temp" value="32"></label>
+                            <label>Max Temp (°F): <input type="number" id="max-temp-input" name="max_temp" value="95"></label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="rain_ok"> Rain OK</label>
+                            <label><input type="checkbox" name="snow_ok"> Snow OK</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Occasions</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="occasions" value="work"> Work</label>
+                            <label><input type="checkbox" name="occasions" value="casual"> Casual</label>
+                            <label><input type="checkbox" name="occasions" value="formal"> Formal</label>
+                            <label><input type="checkbox" name="occasions" value="athletic"> Athletic</label>
+                            <label><input type="checkbox" name="occasions" value="date"> Date Night</label>
+                            <label><input type="checkbox" name="occasions" value="party"> Party</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="item-image">Image URL</label>
+                        <input type="url" id="item-image" name="image_url" placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="item-notes">Notes</label>
+                        <textarea id="item-notes" name="notes" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Item Detail Modal -->
+        <div id="detail-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Item Details</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div id="item-detail-content">
+                    <!-- Item details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript Modules -->
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>

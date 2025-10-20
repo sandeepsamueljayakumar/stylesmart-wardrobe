@@ -1,0 +1,244 @@
+/* public/css/components/filters.css */
+.filters-sidebar {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  height: fit-content;
+  position: sticky;
+  top: 80px;
+}
+
+.filters-sidebar h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--light-gray);
+  padding-bottom: 0.5rem;
+}
+
+.filters-sidebar.has-active-filters {
+  border: 2px solid var(--secondary-color);
+}
+
+.filter-group {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.filter-group:last-child {
+  border-bottom: none;
+}
+
+.filter-group h4 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Temperature Range */
+.temp-range {
+  margin-bottom: 1rem;
+}
+
+.temp-range label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.temp-range input[type="range"] {
+  width: 100%;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+.temp-range input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.temp-range input[type="range"]::-webkit-slider-track {
+  height: 6px;
+  background: var(--light-gray);
+  border-radius: 3px;
+}
+
+/* Filter Select */
+.filter-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  background: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Checkbox and Radio Groups */
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkbox-group label,
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: var(--transition);
+  padding: 0.25rem;
+}
+
+.checkbox-group label:hover,
+.radio-group label:hover {
+  background: var(--light-gray);
+  border-radius: 4px;
+}
+
+.checkbox-group input[type="checkbox"],
+.radio-group input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--secondary-color);
+}
+
+/* Mobile Filter Toggle */
+.mobile-filter-toggle {
+  display: none;
+}
+
+/* Quick Filter Chips Enhancement */
+.filter-chip.suggested {
+  animation: pulse 2s infinite;
+  border-color: var(--success-color);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(39, 174, 96, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+  }
+}
+
+/* Temperature Input Fields */
+.temp-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.temp-inputs label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.temp-inputs input[type="number"] {
+  padding: 0.5rem;
+  border: 1px solid var(--medium-gray);
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* Filter Count Badge */
+.filter-count {
+  background: var(--secondary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+/* Clear Filters Button */
+#clear-filters {
+  background: none;
+  color: var(--danger-color);
+  border: none;
+  padding: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: var(--transition);
+}
+
+#clear-filters:hover {
+  color: #c0392b;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .mobile-filter-toggle {
+    display: block;
+  }
+  
+  .filters-sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    border-radius: 0;
+  }
+  
+  .filters-sidebar.show {
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .filters-sidebar::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .filters-sidebar.show::before {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
