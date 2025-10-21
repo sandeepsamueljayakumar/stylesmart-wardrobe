@@ -22,7 +22,7 @@ StyleSmart Wardrobe is a single-page web application that combines wardrobe cata
 - 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
 
 ## Screenshot
-![Application Dashboard](https://via.placeholder.com/1200x800?text=StyleSmart+Dashboard)
+![Application Dashboard](https://raw.githubusercontent.com/sandeepsamueljayakumar/stylesmart-wardrobe/refs/heads/main/assets/website.jpg)
 
 ## Tech Stack
 - **Frontend**: Vanilla JavaScript (ES6 Modules), HTML5, CSS3
