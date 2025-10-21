@@ -2,8 +2,6 @@
 
 A weather-aware wardrobe management application that eliminates the daily "what should I wear?" dilemma.
 
-![StyleSmart Wardrobe Screenshot](https://via.placeholder.com/800x400?text=StyleSmart+Wardrobe+Screenshot)
-
 ## Author
 **Sandeep Samuel Jayakumar**  
 Northeastern University - Web Development Course  
@@ -218,4 +216,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Sandeep Samuel Jayakumar - [jayakumar.sa@northeastern.edu](mailto:jayakumar.sa@northeastern.edu)
 
-Project Link: [https://github.com/yourusername/stylesmart-wardrobe](https://github.com/yourusername/stylesmart-wardrobe)
+Project Link: [https://github.com/sandeepsamueljayakumar/stylesmart-wardrobe](https://github.com/sandeepsamueljayakumar/stylesmart-wardrobe)
