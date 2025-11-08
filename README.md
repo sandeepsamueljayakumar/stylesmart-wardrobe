@@ -29,7 +29,6 @@ StyleSmart Wardrobe is a single-page web application that combines wardrobe cata
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Native Driver, no Mongoose)
 - **Tools**: ESLint, Prettier
-- **Deployment**: [Your deployment platform]
 
 ## Instructions to Build
 
